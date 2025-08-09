@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyabihoko - Depths of the Ancient Lake</title>
-    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-33HPP11ZLH"></script>
     <script>
@@ -14,1584 +10,411 @@
         gtag('config', 'G-33HPP11ZLH');
     </script>
     
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyabihoko - Depths of the Ancient Lake</title>
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0,255,255,0.8) 0%, rgba(0,150,255,0.4) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            transition: transform 0.1s ease;
+        }
+
+        /* Slideshow Container */
+        .slideshow-container {
+            position: relative;
+            width: 100vw;
             height: 100vh;
             overflow: hidden;
-            position: relative;
-            /* Murky underwater background - deep, dark, mysterious */
-            background: radial-gradient(ellipse at center, #1a3b4a 0%, #0d1f2a 25%, #061016 50%, #030609 100%);
         }
 
-        /* Murky water layers with sediment */
-        .murky-water-container {
+        /* Individual Slides */
+        .slide {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .murky-layer {
-            position: absolute;
-            width: 120%;
-            height: 120%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(139, 107, 61, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(62, 90, 108, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(26, 58, 74, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 70% 30%, rgba(101, 67, 33, 0.15) 0%, transparent 45%);
-            animation: murkDrift 60s linear infinite;
-            opacity: 0.8;
-        }
-
-        .murky-layer:nth-child(2) {
-            animation: murkDrift 45s linear infinite reverse;
-            opacity: 0.6;
-            transform: scale(1.1);
-        }
-
-        .murky-layer:nth-child(3) {
-            animation: murkDrift 75s linear infinite;
-            opacity: 0.4;
-            transform: scale(1.3) rotate(180deg);
-        }
-
-        @keyframes murkDrift {
-            0% { transform: translateX(-10%) translateY(-5%) rotate(0deg); }
-            25% { transform: translateX(5%) translateY(-15%) rotate(2deg); }
-            50% { transform: translateX(15%) translateY(5%) rotate(0deg); }
-            75% { transform: translateX(-5%) translateY(15%) rotate(-2deg); }
-            100% { transform: translateX(-10%) translateY(-5%) rotate(0deg); }
-        }
-
-        /* Floating debris and sediment particles */
-        .debris-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .debris {
-            position: absolute;
-            border-radius: 50%;
-            animation: floatDebris 25s linear infinite;
-        }
-
-        /* Different types of floating particles */
-        .debris:nth-child(1) { 
-            width: 6px; height: 6px; 
-            left: 5%; 
-            background: rgba(139, 107, 61, 0.4);
-            animation-delay: 0s; 
-            animation-duration: 30s; 
-        }
-        .debris:nth-child(2) { 
-            width: 3px; height: 3px; 
-            left: 15%; 
-            background: rgba(101, 67, 33, 0.3);
-            animation-delay: -8s; 
-            animation-duration: 35s; 
-        }
-        .debris:nth-child(3) { 
-            width: 8px; height: 8px; 
-            left: 30%; 
-            background: rgba(62, 90, 108, 0.3);
-            animation-delay: -15s; 
-            animation-duration: 40s; 
-        }
-        .debris:nth-child(4) { 
-            width: 4px; height: 4px; 
-            left: 50%; 
-            background: rgba(139, 107, 61, 0.35);
-            animation-delay: -20s; 
-            animation-duration: 28s; 
-        }
-        .debris:nth-child(5) { 
-            width: 7px; height: 7px; 
-            left: 70%; 
-            background: rgba(26, 58, 74, 0.4);
-            animation-delay: -12s; 
-            animation-duration: 45s; 
-        }
-        .debris:nth-child(6) { 
-            width: 2px; height: 2px; 
-            left: 85%; 
-            background: rgba(101, 67, 33, 0.25);
-            animation-delay: -25s; 
-            animation-duration: 33s; 
-        }
-        .debris:nth-child(7) { 
-            width: 5px; height: 5px; 
-            left: 10%; 
-            background: rgba(139, 107, 61, 0.3);
-            animation-delay: -30s; 
-            animation-duration: 50s; 
-        }
-        .debris:nth-child(8) { 
-            width: 9px; height: 9px; 
-            left: 90%; 
-            background: rgba(62, 90, 108, 0.25);
-            animation-delay: -5s; 
-            animation-duration: 42s; 
-        }
-
-        @keyframes floatDebris {
-            0% { 
-                transform: translateY(110vh) translateX(0px) rotate(0deg);
-                opacity: 0;
-            }
-            5% { opacity: 0.4; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.3; }
-            95% { opacity: 0.1; }
-            100% { 
-                transform: translateY(-10vh) translateX(50px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Volumetric light shafts through murky water */
-        .light-shafts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(168deg, transparent 0%, rgba(255, 255, 255, 0.02) 15%, transparent 16%),
-                linear-gradient(12deg, transparent 0%, rgba(255, 255, 255, 0.03) 20%, transparent 22%),
-                linear-gradient(95deg, transparent 0%, rgba(139, 107, 61, 0.04) 25%, transparent 27%),
-                linear-gradient(45deg, transparent 0%, rgba(62, 146, 204, 0.02) 35%, transparent 37%);
-            animation: lightShiftSlow 30s ease-in-out infinite alternate;
-            z-index: 3;
-        }
-
-        @keyframes lightShiftSlow {
-            0% { 
-                opacity: 0.3; 
-                transform: translateX(-3%) rotate(0.8deg);
-                filter: blur(1px);
-            }
-            25% { 
-                opacity: 0.6; 
-                transform: translateX(1%) rotate(-0.4deg);
-                filter: blur(1.2px);
-            }
-            50% { 
-                opacity: 0.8; 
-                transform: translateX(2%) rotate(0.6deg);
-                filter: blur(0.8px);
-            }
-            75% { 
-                opacity: 0.5; 
-                transform: translateX(-1%) rotate(-0.2deg);
-                filter: blur(1.5px);
-            }
-            100% { 
-                opacity: 0.4; 
-                transform: translateX(-2%) rotate(0.3deg);
-                filter: blur(1px);
-            }
-        }
-
-        /* Ultra-realistic floating parchment container */
-        .floating-parchment-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            /* Complex multi-layered floating animation */
-            animation: 
-                floatPrimary 12s ease-in-out infinite,
-                swaySecondary 18s ease-in-out infinite,
-                tiltTertiary 22s ease-in-out infinite,
-                depthOscillation 16s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-
-        /* Primary floating motion (main up/down) */
-        @keyframes floatPrimary {
-            0%, 100% { 
-                transform: translate(-50%, -50%) translateY(0px) translateZ(0px);
-            }
-            20% { 
-                transform: translate(-50%, -50%) translateY(-12px) translateZ(3px);
-            }
-            40% { 
-                transform: translate(-50%, -50%) translateY(-8px) translateZ(5px);
-            }
-            60% { 
-                transform: translate(-50%, -50%) translateY(-20px) translateZ(2px);
-            }
-            80% { 
-                transform: translate(-50%, -50%) translateY(-15px) translateZ(4px);
-            }
-        }
-
-        /* Secondary swaying motion (left/right drift) */
-        @keyframes swaySecondary {
-            0%, 100% { 
-                transform: translate(-50%, -50%) translateX(0px);
-            }
-            25% { 
-                transform: translate(-50%, -50%) translateX(8px);
-            }
-            50% { 
-                transform: translate(-50%, -50%) translateX(-5px);
-            }
-            75% { 
-                transform: translate(-50%, -50%) translateX(-12px);
-            }
-        }
-
-        /* Tertiary tilting motion (3D rotation) */
-        @keyframes tiltTertiary {
-            0%, 100% { 
-                transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-            }
-            15% { 
-                transform: translate(-50%, -50%) rotateX(0.8deg) rotateY(-0.5deg) rotateZ(0.3deg);
-            }
-            30% { 
-                transform: translate(-50%, -50%) rotateX(-0.4deg) rotateY(0.7deg) rotateZ(-0.6deg);
-            }
-            45% { 
-                transform: translate(-50%, -50%) rotateX(0.6deg) rotateY(0.3deg) rotateZ(0.4deg);
-            }
-            60% { 
-                transform: translate(-50%, -50%) rotateX(-0.3deg) rotateY(-0.8deg) rotateZ(-0.2deg);
-            }
-            75% { 
-                transform: translate(-50%, -50%) rotateX(0.5deg) rotateY(0.2deg) rotateZ(0.5deg);
-            }
-            90% { 
-                transform: translate(-50%, -50%) rotateX(-0.7deg) rotateY(-0.4deg) rotateZ(-0.3deg);
-            }
-        }
-
-        /* Depth oscillation (forward/backward) */
-        @keyframes depthOscillation {
-            0%, 100% { 
-                transform: translate(-50%, -50%) perspective(1000px) translateZ(0px);
-            }
-            50% { 
-                transform: translate(-50%, -50%) perspective(1000px) translateZ(10px);
-            }
-        }
-
-        .ancient-parchment {
-            width: 90vw;
-            max-width: 750px;
-            min-height: 600px;
-            padding: 4rem 3.5rem;
-            background: 
-                linear-gradient(135deg, 
-                    rgba(245, 235, 220, 0.94) 0%, 
-                    rgba(240, 228, 210, 0.96) 20%,
-                    rgba(235, 222, 200, 0.95) 40%,
-                    rgba(250, 240, 225, 0.97) 60%,
-                    rgba(245, 235, 220, 0.93) 80%,
-                    rgba(240, 230, 215, 0.95) 100%
-                );
-            border-radius: 25px;
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.7),
-                0 15px 35px rgba(139, 107, 61, 0.5),
-                inset 0 3px 8px rgba(255, 255, 255, 0.8),
-                inset 0 -3px 8px rgba(139, 107, 61, 0.3),
-                0 0 50px rgba(255, 215, 0, 0.3),
-                0 0 80px rgba(62, 146, 204, 0.2);
-            border: 4px solid rgba(139, 107, 61, 0.8);
-            position: relative;
-            backdrop-filter: blur(12px);
-            
-            /* Layered underwater distortion effects */
-            animation: 
-                underwaterDistort 8s ease-in-out infinite,
-                bubbleWave 12s ease-in-out infinite,
-                depthShimmer 15s ease-in-out infinite,
-                currentSway 20s ease-in-out infinite;
-        }
-
-        /* Underwater distortion animation */
-        @keyframes underwaterDistort {
-            0%, 100% { 
-                filter: blur(0.4px) brightness(1) contrast(1.02);
-                transform: perspective(1500px) rotateX(0.8deg) rotateY(0deg) scale(1);
-            }
-            20% { 
-                filter: blur(0.7px) brightness(1.03) contrast(1.01);
-                transform: perspective(1500px) rotateX(-0.5deg) rotateY(0.6deg) scale(1.003);
-            }
-            40% { 
-                filter: blur(0.5px) brightness(0.98) contrast(1.03);
-                transform: perspective(1500px) rotateX(0.3deg) rotateY(-0.4deg) scale(1.001);
-            }
-            60% { 
-                filter: blur(0.8px) brightness(1.02) contrast(0.99);
-                transform: perspective(1500px) rotateX(-0.6deg) rotateY(-0.5deg) scale(0.999);
-            }
-            80% { 
-                filter: blur(0.6px) brightness(1.01) contrast(1.02);
-                transform: perspective(1500px) rotateX(0.4deg) rotateY(0.3deg) scale(1.002);
-            }
-        }
-
-        /* Bubble wave effect (changing shadows) */
-        @keyframes bubbleWave {
-            0%, 100% { 
-                box-shadow: 
-                    0 30px 60px rgba(0, 0, 0, 0.7),
-                    0 15px 35px rgba(139, 107, 61, 0.5),
-                    inset 0 3px 8px rgba(255, 255, 255, 0.8),
-                    0 0 50px rgba(255, 215, 0, 0.3),
-                    0 0 80px rgba(62, 146, 204, 0.2);
-            }
-            25% { 
-                box-shadow: 
-                    0 35px 70px rgba(0, 0, 0, 0.75),
-                    0 18px 40px rgba(139, 107, 61, 0.6),
-                    inset 0 4px 12px rgba(255, 255, 255, 0.85),
-                    0 0 60px rgba(255, 215, 0, 0.4),
-                    0 0 90px rgba(62, 146, 204, 0.25),
-                    0 0 30px rgba(26, 58, 74, 0.2);
-            }
-            50% { 
-                box-shadow: 
-                    0 40px 80px rgba(0, 0, 0, 0.8),
-                    0 20px 45px rgba(139, 107, 61, 0.7),
-                    inset 0 5px 15px rgba(255, 255, 255, 0.9),
-                    0 0 70px rgba(255, 215, 0, 0.5),
-                    0 0 100px rgba(62, 146, 204, 0.3),
-                    0 0 40px rgba(26, 58, 74, 0.25);
-            }
-            75% { 
-                box-shadow: 
-                    0 35px 70px rgba(0, 0, 0, 0.75),
-                    0 18px 40px rgba(139, 107, 61, 0.6),
-                    inset 0 4px 12px rgba(255, 255, 255, 0.85),
-                    0 0 60px rgba(255, 215, 0, 0.4),
-                    0 0 90px rgba(62, 146, 204, 0.25),
-                    0 0 30px rgba(26, 58, 74, 0.2);
-            }
-        }
-
-        /* Depth shimmer effect (background color shifts) */
-        @keyframes depthShimmer {
-            0%, 100% { 
-                background: linear-gradient(135deg, 
-                    rgba(245, 235, 220, 0.94) 0%, 
-                    rgba(240, 228, 210, 0.96) 20%,
-                    rgba(235, 222, 200, 0.95) 40%,
-                    rgba(250, 240, 225, 0.97) 60%,
-                    rgba(245, 235, 220, 0.93) 80%,
-                    rgba(240, 230, 215, 0.95) 100%
-                );
-            }
-            33% { 
-                background: linear-gradient(135deg, 
-                    rgba(248, 238, 223, 0.96) 0%, 
-                    rgba(243, 231, 213, 0.97) 20%,
-                    rgba(238, 225, 203, 0.96) 40%,
-                    rgba(252, 242, 227, 0.98) 60%,
-                    rgba(247, 237, 222, 0.95) 80%,
-                    rgba(242, 232, 217, 0.96) 100%
-                );
-            }
-            66% { 
-                background: linear-gradient(135deg, 
-                    rgba(243, 233, 218, 0.95) 0%, 
-                    rgba(238, 226, 208, 0.96) 20%,
-                    rgba(233, 220, 198, 0.94) 40%,
-                    rgba(248, 238, 223, 0.97) 60%,
-                    rgba(243, 233, 218, 0.94) 80%,
-                    rgba(238, 228, 213, 0.95) 100%
-                );
-            }
-        }
-
-        /* Current sway effect (gentle side-to-side) */
-        @keyframes currentSway {
-            0%, 100% { 
-                transform: perspective(1500px) translateX(0px);
-            }
-            50% { 
-                transform: perspective(1500px) translateX(2px);
-            }
-        }
-
-        /* Ancient decorative corners with individual floating effects */
-        .parchment-corner {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(139, 107, 61, 0.9) 0%, rgba(101, 67, 33, 0.6) 70%, transparent 100%);
-        }
-        
-        .corner-tl { 
-            top: -12px; 
-            left: -12px; 
-            border-radius: 0 0 40px 0;
-            animation: cornerFloat1 9s ease-in-out infinite;
-        }
-        .corner-tr { 
-            top: -12px; 
-            right: -12px; 
-            border-radius: 0 0 0 40px;
-            animation: cornerFloat2 11s ease-in-out infinite;
-        }
-        .corner-bl { 
-            bottom: -12px; 
-            left: -12px; 
-            border-radius: 0 40px 0 0;
-            animation: cornerFloat3 13s ease-in-out infinite;
-        }
-        .corner-br { 
-            bottom: -12px; 
-            right: -12px; 
-            border-radius: 40px 0 0 0;
-            animation: cornerFloat4 10s ease-in-out infinite;
-        }
-
-        @keyframes cornerFloat1 {
-            0%, 100% { 
-                opacity: 0.7; 
-                transform: scale(1) rotate(0deg) translateX(0px) translateY(0px);
-            }
-            50% { 
-                opacity: 0.95; 
-                transform: scale(1.08) rotate(3deg) translateX(2px) translateY(-1px);
-            }
-        }
-
-        @keyframes cornerFloat2 {
-            0%, 100% { 
-                opacity: 0.6; 
-                transform: scale(1) rotate(0deg) translateX(0px) translateY(0px);
-            }
-            50% { 
-                opacity: 0.9; 
-                transform: scale(1.06) rotate(-2deg) translateX(-1px) translateY(2px);
-            }
-        }
-
-        @keyframes cornerFloat3 {
-            0%, 100% { 
-                opacity: 0.8; 
-                transform: scale(1) rotate(0deg) translateX(0px) translateY(0px);
-            }
-            50% { 
-                opacity: 1; 
-                transform: scale(1.1) rotate(4deg) translateX(1px) translateY(-2px);
-            }
-        }
-
-        @keyframes cornerFloat4 {
-            0%, 100% { 
-                opacity: 0.65; 
-                transform: scale(1) rotate(0deg) translateX(0px) translateY(0px);
-            }
-            50% { 
-                opacity: 0.92; 
-                transform: scale(1.07) rotate(-3deg) translateX(-2px) translateY(1px);
-            }
-        }
-
-        /* Enhanced typography with underwater glow effects */
-        .mystical-title {
-            font-family: 'Times New Roman', serif;
-            color: #8b6b3d;
-            text-align: center;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1.8rem;
-            text-shadow: 
-                4px 4px 8px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(255, 215, 0, 0.6),
-                0 0 35px rgba(139, 107, 61, 0.4),
-                0 0 50px rgba(62, 146, 204, 0.2);
-            font-weight: bold;
-            letter-spacing: 4px;
-            animation: titleGlow 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% { 
-                text-shadow: 
-                    4px 4px 8px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(255, 215, 0, 0.6),
-                    0 0 35px rgba(139, 107, 61, 0.4),
-                    0 0 50px rgba(62, 146, 204, 0.2);
-                transform: scale(1);
-            }
-            50% { 
-                text-shadow: 
-                    4px 4px 12px rgba(0, 0, 0, 0.6),
-                    0 0 30px rgba(255, 215, 0, 0.8),
-                    0 0 50px rgba(139, 107, 61, 0.6),
-                    0 0 70px rgba(62, 146, 204, 0.3),
-                    0 0 90px rgba(26, 58, 74, 0.2);
-                transform: scale(1.005);
-            }
-            100% { 
-                text-shadow: 
-                    4px 4px 10px rgba(0, 0, 0, 0.55),
-                    0 0 25px rgba(255, 215, 0, 0.7),
-                    0 0 45px rgba(139, 107, 61, 0.5),
-                    0 0 65px rgba(62, 146, 204, 0.25),
-                    0 0 85px rgba(26, 58, 74, 0.15);
-                transform: scale(1.002);
-            }
-        }
-
-        .mystical-subtitle {
-            text-align: center;
-            color: #5a4a32;
-            font-style: italic;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            margin-bottom: 3.5rem;
-            opacity: 0.9;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-            animation: subtitlePulse 10s ease-in-out infinite alternate;
-        }
-
-        @keyframes subtitlePulse {
-            0% { 
-                opacity: 0.85; 
-                transform: translateY(0px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(-1px);
-            }
-        }
-
-        /* UI/UX Focused Video Container */
-        .floating-video-container {
-            background: linear-gradient(145deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(248, 248, 248, 0.92) 100%);
-            padding: 2rem;
-            border-radius: 25px;
-            border: 3px solid rgba(139, 107, 61, 0.8);
-            box-shadow: 
-                inset 0 4px 15px rgba(255, 255, 255, 0.8),
-                0 15px 40px rgba(0, 0, 0, 0.6),
-                0 8px 25px rgba(139, 107, 61, 0.5),
-                0 0 50px rgba(255, 215, 0, 0.3),
-                0 0 70px rgba(62, 146, 204, 0.2);
-            position: relative;
-            min-height: 450px;
-            backdrop-filter: blur(10px);
-            
-            /* Gentle floating for UI stability */
-            animation: 
-                videoContainerFloat 16s ease-in-out infinite,
-                videoContainerGlow 12s ease-in-out infinite alternate;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes videoContainerFloat {
-            0%, 100% { 
-                transform: translateY(0px) translateZ(0px);
-            }
-            25% { 
-                transform: translateY(-3px) translateZ(1px);
-            }
-            50% { 
-                transform: translateY(-1px) translateZ(-0.5px);
-            }
-            75% { 
-                transform: translateY(-4px) translateZ(0.5px);
-            }
-        }
-
-        @keyframes videoContainerGlow {
-            0% { 
-                box-shadow: 
-                    inset 0 4px 15px rgba(255, 255, 255, 0.8),
-                    0 15px 40px rgba(0, 0, 0, 0.6),
-                    0 8px 25px rgba(139, 107, 61, 0.5),
-                    0 0 50px rgba(255, 215, 0, 0.3),
-                    0 0 70px rgba(62, 146, 204, 0.2);
-            }
-            100% { 
-                box-shadow: 
-                    inset 0 6px 20px rgba(255, 255, 255, 0.9),
-                    0 20px 50px rgba(0, 0, 0, 0.7),
-                    0 12px 35px rgba(139, 107, 61, 0.6),
-                    0 0 60px rgba(255, 215, 0, 0.4),
-                    0 0 90px rgba(62, 146, 204, 0.3),
-                    0 0 30px rgba(26, 58, 74, 0.2);
-            }
-        }
-
-        /* Video Player Styling */
-        .video-player-wrapper {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1a3b4a 0%, #0d1f2a 100%);
-            border: 2px solid rgba(139, 107, 61, 0.6);
-            box-shadow: 
-                inset 0 3px 10px rgba(0, 0, 0, 0.4),
-                0 5px 20px rgba(139, 107, 61, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-player-wrapper:hover {
-            transform: scale(1.02);
-            box-shadow: 
-                inset 0 3px 10px rgba(0, 0, 0, 0.4),
-                0 8px 30px rgba(139, 107, 61, 0.5),
-                0 0 40px rgba(255, 215, 0, 0.4);
-        }
-
-        .concept-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .concept-video:hover {
-            filter: brightness(1.1) contrast(1.05);
-        }
-
-        /* Custom Video Controls Overlay */
-        .video-controls-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
-            padding: 1rem;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            justify-content: center;
         }
 
-        .video-player-wrapper:hover .video-controls-overlay {
+        .slide.active {
             opacity: 1;
         }
 
-        .play-pause-btn {
-            width: 45px;
-            height: 45px;
+        /* Slide 1: Deep Water Base */
+        .slide-water {
+            background: linear-gradient(180deg, 
+                #001122 0%, 
+                #002244 30%, 
+                #003366 60%, 
+                #001a33 100%);
+        }
+
+        .water-title {
+            color: #00ccff;
+            font-size: 4rem;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0,204,255,0.5);
+            animation: waterGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes waterGlow {
+            0% { text-shadow: 0 0 20px rgba(0,204,255,0.5); }
+            100% { text-shadow: 0 0 40px rgba(0,204,255,0.8), 0 0 60px rgba(0,204,255,0.3); }
+        }
+
+        /* Slide 2: Particles Layer */
+        .slide-particles {
+            background: linear-gradient(180deg, 
+                #001122 0%, 
+                #002244 30%, 
+                #003366 60%, 
+                #001a33 100%);
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0,255,255,0.6);
             border-radius: 50%;
-            background: rgba(255, 215, 0, 0.9);
-            border: 2px solid rgba(139, 107, 61, 0.8);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; top: 60%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 70%; top: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 80%; top: 70%; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 40%; top: 80%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-20px) translateX(10px) rotate(90deg); opacity: 1; }
+            50% { transform: translateY(-10px) translateX(-15px) rotate(180deg); opacity: 0.8; }
+            75% { transform: translateY(-30px) translateX(5px) rotate(270deg); opacity: 1; }
+        }
+
+        .particles-title {
+            color: #66ffcc;
+            font-size: 3rem;
+            text-align: center;
+            margin-top: 40vh;
+            text-shadow: 0 0 30px rgba(102,255,204,0.7);
+        }
+
+        /* Slide 3: Ancient Symbols */
+        .slide-symbols {
+            background: linear-gradient(180deg, 
+                #001122 0%, 
+                #002244 30%, 
+                #003366 60%, 
+                #001a33 100%);
+        }
+
+        .ancient-symbol {
+            position: absolute;
+            color: rgba(255,204,102,0.7);
+            font-size: 2rem;
+            animation: symbolPulse 4s infinite ease-in-out;
+        }
+
+        .symbol1 { top: 20%; left: 15%; animation-delay: 0s; }
+        .symbol2 { top: 60%; right: 20%; animation-delay: 1s; }
+        .symbol3 { bottom: 30%; left: 30%; animation-delay: 2s; }
+        .symbol4 { top: 40%; right: 40%; animation-delay: 3s; }
+
+        @keyframes symbolPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        .symbols-title {
+            color: #ffcc66;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-top: 35vh;
+            text-shadow: 0 0 25px rgba(255,204,102,0.6);
+        }
+
+        /* Hidden Clue - Only visible during symbols slide */
+        .hidden-clue {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0,255,255,0.1);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            font-family: monospace;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .hidden-clue:hover {
+            color: rgba(0,255,255,0.8);
+        }
+
+        /* Slide 4: Video Layer */
+        .slide-video {
+            background: #000;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 15px rgba(255, 215, 0, 0.4);
         }
 
-        .play-pause-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 215, 0, 1);
-            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.6);
-        }
-
-        .play-pause-btn::before {
-            content: "▶";
-            color: #8b6b3d;
-            font-size: 18px;
-            font-weight: bold;
-            margin-left: 2px;
-        }
-
-        .play-pause-btn.playing::before {
-            content: "⏸";
-            margin-left: 0;
-        }
-
-        .video-progress {
-            flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.9) 0%, rgba(139, 107, 61, 0.8) 100%);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        .video-time {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
-            font-family: 'Courier New', monospace;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Video Title and Description */
-        .video-title {
-            text-align: center;
-            color: #8b6b3d;
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: titleShimmer 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleShimmer {
-            0% { 
-                color: #8b6b3d;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            100% { 
-                color: #a67c52;
-                text-shadow: 
-                    2px 2px 4px rgba(0, 0, 0, 0.3),
-                    0 0 15px rgba(255, 215, 0, 0.3);
-            }
-        }
-
-        .video-description {
-            text-align: center;
-            color: #5a4a32;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-top: 1.5rem;
-            opacity: 0.9;
-        }
-
-        /* Interactive UI Elements */
-        .ui-action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .ui-button {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, rgba(139, 107, 61, 0.9) 0%, rgba(101, 67, 33, 0.9) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.6);
-            border-radius: 25px;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 5px 15px rgba(139, 107, 61, 0.4),
-                inset 0 2px 5px rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ui-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-            transition: left 0.5s ease;
-        }
-
-        .ui-button:hover::before {
-            left: 100%;
-        }
-
-        .ui-button:hover {
-            transform: translateY(-2px) scale(1.05);
-            background: linear-gradient(135deg, rgba(139, 107, 61, 1) 0%, rgba(101, 67, 33, 1) 100%);
-            border-color: rgba(255, 215, 0, 0.9);
-            box-shadow: 
-                0 8px 25px rgba(139, 107, 61, 0.6),
-                inset 0 2px 5px rgba(255, 255, 255, 0.4),
-                0 0 30px rgba(255, 215, 0, 0.3);
-        }
-
-        .ui-button:active {
-            transform: translateY(0px) scale(1.02);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .floating-video-container {
-                padding: 1.5rem;
-                min-height: 400px;
-            }
-            
-            .video-player-wrapper {
-                height: 280px;
-            }
-            
-            .video-title {
-                font-size: 1.5rem;
-            }
-            
-            .ui-action-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .ui-button {
-                width: 200px;
-            }
-        }
-
-        /* Floating mystical symbols around the form */
-        .floating-symbol {
-            position: absolute;
-            color: rgba(139, 107, 61, 0.5);
-            font-size: 3rem;
-            z-index: 15;
-            text-shadow: 0 0 10px rgba(139, 107, 61, 0.3);
-        }
-
-        .symbol-1 { 
-            top: 10%; 
-            left: -8%; 
-            animation: symbolFloat1 16s ease-in-out infinite;
-        }
-        .symbol-2 { 
-            top: 15%; 
-            right: -8%; 
-            animation: symbolFloat2 20s ease-in-out infinite;
-        }
-        .symbol-3 { 
-            bottom: 10%; 
-            left: -6%; 
-            animation: symbolFloat3 24s ease-in-out infinite;
-        }
-        .symbol-4 { 
-            bottom: 15%; 
-            right: -6%; 
-            animation: symbolFloat4 18s ease-in-out infinite;
-        }
-
-        @keyframes symbolFloat1 {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.4;
-            }
-            25% { 
-                transform: translateY(-15px) translateX(8px) rotate(15deg);
-                opacity: 0.8;
-            }
-            50% { 
-                transform: translateY(-8px) translateX(-5px) rotate(8deg);
-                opacity: 0.6;
-            }
-            75% { 
-                transform: translateY(-20px) translateX(3px) rotate(-5deg);
-                opacity: 0.7;
-            }
-        }
-
-        @keyframes symbolFloat2 {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.3;
-            }
-            25% { 
-                transform: translateY(12px) translateX(-6px) rotate(-12deg);
-                opacity: 0.7;
-            }
-            50% { 
-                transform: translateY(-5px) translateX(-10px) rotate(-8deg);
-                opacity: 0.5;
-            }
-            75% { 
-                transform: translateY(8px) translateX(4px) rotate(10deg);
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes symbolFloat3 {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.5;
-            }
-            25% { 
-                transform: translateY(-10px) translateX(12px) rotate(20deg);
-                opacity: 0.9;
-            }
-            50% { 
-                transform: translateY(6px) translateX(-8px) rotate(5deg);
-                opacity: 0.7;
-            }
-            75% { 
-                transform: translateY(-18px) translateX(6px) rotate(-15deg);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes symbolFloat4 {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.4;
-            }
-            25% { 
-                transform: translateY(10px) translateX(-10px) rotate(-25deg);
-                opacity: 0.8;
-            }
-            50% { 
-                transform: translateY(-12px) translateX(-4px) rotate(-10deg);
-                opacity: 0.6;
-            }
-            75% { 
-                transform: translateY(15px) translateX(8px) rotate(18deg);
-                opacity: 0.7;
-            }
-        }
-
-        /* Tally embed with realistic underwater effect */
-        .tally-embed-wrapper {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .concept-video {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
             border-radius: 15px;
-            overflow: hidden;
-            animation: embedFloat 22s ease-in-out infinite;
+            box-shadow: 0 0 50px rgba(0,255,255,0.3);
+            opacity: 0;
+            animation: videoFadeIn 2s ease-in-out forwards;
         }
 
-        @keyframes embedFloat {
-            0%, 100% { 
-                transform: scale(1);
-                filter: brightness(1) contrast(1.01);
-            }
-            33% { 
-                transform: scale(1.003);
-                filter: brightness(1.02) contrast(1.02);
-            }
-            66% { 
-                transform: scale(1.001);
-                filter: brightness(0.99) contrast(1.01);
-            }
+        @keyframes videoFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Enhanced placeholder styling */
-        .form-placeholder {
+        .video-title {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-size: 2rem;
             text-align: center;
-            color: #8b6b3d;
-            font-size: 1.3rem;
-            line-height: 1.9;
-            animation: placeholderPulse 12s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(0,255,255,0.8);
+            animation: titleFloat 3s ease-in-out infinite alternate;
         }
 
-        @keyframes placeholderPulse {
-            0% { 
-                opacity: 0.8; 
-                transform: scale(1);
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1.005);
-            }
+        @keyframes titleFloat {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(-10px); }
         }
 
-        .placeholder-title {
-            color: #5a4a32;
-            display: block;
-            margin-bottom: 2rem;
-            font-size: 1.7rem;
-            font-weight: bold;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .embed-code {
-            background: rgba(139, 107, 61, 0.2);
-            padding: 1.5rem;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            display: block;
-            margin: 2rem 0;
-            word-break: break-all;
-            border: 2px dashed rgba(139, 107, 61, 0.5);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Underwater caustics effect overlay */
-        .caustics-overlay {
+        /* Navigation Dots */
+        .nav-dots {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 15% 25%, rgba(255, 255, 255, 0.08) 0%, transparent 45%),
-                radial-gradient(ellipse at 85% 75%, rgba(62, 146, 204, 0.12) 0%, transparent 55%),
-                radial-gradient(ellipse at 65% 35%, rgba(255, 215, 0, 0.06) 0%, transparent 35%),
-                radial-gradient(ellipse at 35% 80%, rgba(139, 107, 61, 0.05) 0%, transparent 50%);
-            animation: causticsShift 28s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 4;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
         }
 
-        @keyframes causticsShift {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 0.6;
-            }
-            25% { 
-                transform: scale(1.15) rotate(2deg);
-                opacity: 0.9;
-            }
-            50% { 
-                transform: scale(0.9) rotate(-1deg);
-                opacity: 0.7;
-            }
-            75% { 
-                transform: scale(1.1) rotate(1.5deg);
-                opacity: 0.8;
-            }
-        }
-
-        /* Enhanced responsive design */
-        @media (max-width: 768px) {
-            .ancient-parchment {
-                width: 95vw;
-                padding: 3rem 2.5rem;
-                min-height: 500px;
-            }
-            
-            .mystical-title {
-                font-size: 2.8rem;
-                margin-bottom: 1.2rem;
-            }
-            
-            .mystical-subtitle {
-                font-size: 1.3rem;
-                margin-bottom: 2.5rem;
-            }
-            
-            .floating-form-container {
-                padding: 2.5rem;
-                min-height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ancient-parchment {
-                padding: 2.5rem 2rem;
-            }
-            
-            .floating-form-container {
-                padding: 2rem;
-            }
-            
-            .floating-symbol {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* Underwater bubble effects */
-        .bubble-stream {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(62, 146, 204, 0.08) 100%);
+        .dot {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            animation: bubbleRise 20s linear infinite;
-            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+            background: rgba(0,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .bubble:nth-child(1) { 
-            width: 12px; height: 12px; 
-            left: 8%; 
-            animation-delay: 0s; 
-            animation-duration: 25s;
-        }
-        .bubble:nth-child(2) { 
-            width: 18px; height: 18px; 
-            left: 25%; 
-            animation-delay: -5s; 
-            animation-duration: 30s;
-        }
-        .bubble:nth-child(3) { 
-            width: 8px; height: 8px; 
-            left: 45%; 
-            animation-delay: -12s; 
-            animation-duration: 35s;
-        }
-        .bubble:nth-child(4) { 
-            width: 15px; height: 15px; 
-            left: 65%; 
-            animation-delay: -18s; 
-            animation-duration: 28s;
-        }
-        .bubble:nth-child(5) { 
-            width: 10px; height: 10px; 
-            left: 80%; 
-            animation-delay: -8s; 
-            animation-duration: 32s;
-        }
-        .bubble:nth-child(6) { 
-            width: 20px; height: 20px; 
-            left: 92%; 
-            animation-delay: -15s; 
-            animation-duration: 40s;
+        .dot.active {
+            background: rgba(0,255,255,0.9);
+            box-shadow: 0 0 15px rgba(0,255,255,0.5);
         }
 
-        @keyframes bubbleRise {
-            0% { 
-                transform: translateY(110vh) translateX(0px) scale(0.3);
-                opacity: 0;
-            }
-            5% { 
-                opacity: 0.4;
-            }
-            10% { 
-                opacity: 0.7;
-                transform: translateY(100vh) translateX(5px) scale(0.5);
-            }
-            90% { 
-                opacity: 0.2;
-                transform: translateY(10vh) translateX(-20px) scale(1.2);
-            }
-            100% { 
-                transform: translateY(-5vh) translateX(-30px) scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        /* Mouse interaction effects */
-        .parchment-container:hover .ancient-parchment {
-            animation-play-state: paused;
-            transform: perspective(1500px) rotateX(0deg) rotateY(0deg) scale(1.01);
-            transition: transform 0.3s ease;
-        }
-
-        .floating-video-container:hover {
-            animation-play-state: paused;
-            transform: scale(1.01);
-            transition: transform 0.3s ease;
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .water-title { font-size: 2.5rem; }
+            .particles-title { font-size: 2rem; }
+            .symbols-title { font-size: 1.8rem; }
+            .video-title { font-size: 1.5rem; }
+            .ancient-symbol { font-size: 1.5rem; }
+            .concept-video { width: 95%; height: 80%; }
         }
     </style>
 </head>
 <body>
-    <!-- Enhanced murky water background -->
-    <div class="murky-water-container">
-        <div class="murky-layer"></div>
-        <div class="murky-layer"></div>
-        <div class="murky-layer"></div>
-    </div>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
 
-    <!-- Floating debris and sediment -->
-    <div class="debris-container">
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-        <div class="debris"></div>
-    </div>
+    <div class="slideshow-container">
+        <!-- Slide 1: Water Base -->
+        <div class="slide slide-water active">
+            <h1 class="water-title">Ancient Waters Await</h1>
+        </div>
 
-    <!-- Volumetric light shafts -->
-    <div class="light-shafts"></div>
+        <!-- Slide 2: Particles -->
+        <div class="slide slide-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <h2 class="particles-title">Mysteries Float in the Depths</h2>
+        </div>
 
-    <!-- Underwater caustics overlay -->
-    <div class="caustics-overlay"></div>
+        <!-- Slide 3: Ancient Symbols -->
+        <div class="slide slide-symbols">
+            <div class="ancient-symbol symbol1">◊</div>
+            <div class="ancient-symbol symbol2">△</div>
+            <div class="ancient-symbol symbol3">◈</div>
+            <div class="ancient-symbol symbol4">✧</div>
+            <h2 class="symbols-title">Sacred Symbols Emerge</h2>
+            <!-- Hidden Clue -->
+            <div class="hidden-clue">SACRIFICE.REVEALS.THE.PATH</div>
+        </div>
 
-    <!-- Bubble stream -->
-    <div class="bubble-stream">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
-
-    <!-- Ultra-realistic floating parchment container -->
-    <div class="floating-parchment-container parchment-container">
-        <div class="ancient-parchment">
-            <!-- Floating corner decorations -->
-            <div class="parchment-corner corner-tl"></div>
-            <div class="parchment-corner corner-tr"></div>
-            <div class="parchment-corner corner-bl"></div>
-            <div class="parchment-corner corner-br"></div>
-            
-            <!-- Floating mystical symbols -->
-            <div class="floating-symbol symbol-1">☽</div>
-            <div class="floating-symbol symbol-2">☾</div>
-            <div class="floating-symbol symbol-3">⚜</div>
-            <div class="floating-symbol symbol-4">✦</div>
-            
-            <!-- Main content -->
-            <h1 class="mystical-title">Step into Nyabihoko</h1>
-            <p class="mystical-subtitle">The Lake That Remembers Your Every Choice</p>
-            
-            <!-- UI/UX Focused Video Experience -->
-            <div class="floating-video-container">
-                <h2 class="video-title">🎨 Paper Mache Concept Art</h2>
-                
-                <!-- Video Player with Custom Controls -->
-                <div class="video-player-wrapper" id="videoPlayerWrapper">
-                    <video 
-                        class="concept-video" 
-                        id="conceptVideo"
-                        preload="none"
-                        loading="lazy"
-                        muted
-                        playsinline
-                        poster=""
-                        onloadstart="optimizeVideoLoading(this)">
-                        <source src="assets/paper_mache_concept_art.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    
-                    <!-- Custom Video Controls -->
-                    <div class="video-controls-overlay" id="videoControls">
-                        <button class="play-pause-btn" id="playPauseBtn" aria-label="Play/Pause video"></button>
-                        <div class="video-progress" id="videoProgress">
-                            <div class="video-progress-fill" id="videoProgressFill"></div>
-                        </div>
-                        <span class="video-time" id="videoTime">0:00 / 0:00</span>
-                    </div>
-                </div>
-                
-                <p class="video-description">
-                    Dive into the conceptual depths of Nyabihoko's artistic vision. 
-                    This exclusive concept art reveals the paper mache techniques that bring our underwater world to life.
-                </p>
-                
-                <!-- Interactive UI Action Buttons -->
-                <div class="ui-action-buttons">
-                    <button class="ui-button" id="exploreBtn">
-                        <span>🌊 Explore the Lake</span>
-                    </button>
-                    <button class="ui-button" id="learnMoreBtn">
-                        <span>📖 Learn More</span>
-                    </button>
-                    <button class="ui-button" id="joinBtn">
-                        <span>✨ Join the Experience</span>
-                    </button>
-                </div>
+        <!-- Slide 4: Video -->
+        <div class="slide slide-video">
+            <div class="video-container">
+                <h2 class="video-title">NYABIHOKO</h2>
+                <video class="concept-video" autoplay muted loop playsinline>
+                    <source src="assets/paper_mache_concept_art.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="nav-dots">
+            <div class="dot active" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+            <div class="dot" data-slide="3"></div>
         </div>
     </div>
 
-    <!-- Tally embed script - Uncomment when you add your Tally form -->
-    <!--
     <script>
-        var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc.split("?")[0].replace("/r/","/widgets/embed/");e.removeAttribute("data-tally-src");e.addEventListener("load",(function(){this.style.height=this.contentDocument.body.scrollHeight+"px"}));}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
-    </script>
-    -->
-
-    <!-- Simple underwater cursor like index.html -->
-    <script>
-        // Hide default cursor and create custom one
-        document.body.style.cursor = 'none';
-        const cursor = document.createElement('div');
-        cursor.style.position = 'absolute';
-        cursor.style.width = '30px';
-        cursor.style.height = '30px';
-        cursor.style.background = 'radial-gradient(circle, rgba(62, 146, 204, 0.8) 0%, transparent 70%)';
-        cursor.style.borderRadius = '50%';
-        cursor.style.pointerEvents = 'none';
-        cursor.style.zIndex = '1000';
-        cursor.style.boxShadow = '0 0 15px rgba(62, 146, 204, 0.6)';
-        cursor.style.display = 'flex';
-        cursor.style.alignItems = 'center';
-        cursor.style.justifyContent = 'center';
-        cursor.style.fontSize = '12px';
-        cursor.style.color = 'white';
-        cursor.style.fontWeight = 'bold';
-        cursor.innerHTML = '○';
-        document.body.appendChild(cursor);
-
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX - 15}px`;
-            cursor.style.top = `${e.clientY - 15}px`;
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
 
-        // Simple cursor state changes
-        const interactiveElements = document.querySelectorAll('.ui-button, .play-pause-btn, .video-progress, .video-player-wrapper, .concept-video');
-        
-        interactiveElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.style.background = 'radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, transparent 70%)';
-                cursor.innerHTML = '✦';
-            });
-            element.addEventListener('mouseleave', () => {
-                cursor.style.background = 'radial-gradient(circle, rgba(62, 146, 204, 0.8) 0%, transparent 70%)';
-                cursor.innerHTML = '○';
-            });
-        });
-    </script>
+        // Slideshow Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
 
-    <!-- Video Player Controls and UI Interactions -->
-    <script>
-        // Video optimization function for faster loading
-        function optimizeVideoLoading(video) {
-            // Set lower quality initially for faster loading
-            video.addEventListener('loadstart', function() {
-                console.log('Video loading optimized for performance');
-            });
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
             
-            // Preload only when video comes into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        video.preload = 'metadata';
-                        observer.unobserve(video);
-                    }
-                });
-            }, { threshold: 0.1 });
+            // Show current slide
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
             
-            observer.observe(video);
+            // Start video when reaching the last slide
+            if (index === totalSlides - 1) {
+                const video = document.querySelector('.concept-video');
+                if (video) {
+                    video.currentTime = 0;
+                    video.play();
+                }
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('conceptVideo');
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const videoProgress = document.getElementById('videoProgress');
-            const videoProgressFill = document.getElementById('videoProgressFill');
-            const videoTime = document.getElementById('videoTime');
-            const videoWrapper = document.getElementById('videoPlayerWrapper');
-            
-            // Format time helper
-            function formatTime(seconds) {
-                const minutes = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance slides
+        let slideInterval = setInterval(nextSlide, 4000);
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                goToSlide(index);
+                // Restart auto-advance after manual navigation
+                slideInterval = setInterval(nextSlide, 4000);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                clearInterval(slideInterval);
+                nextSlide();
+                slideInterval = setInterval(nextSlide, 4000);
+            } else if (e.key === 'ArrowLeft') {
+                clearInterval(slideInterval);
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+                slideInterval = setInterval(nextSlide, 4000);
             }
-            
-            // Play/Pause functionality with loading optimization
-            function togglePlayPause() {
-                if (video.paused) {
-                    // Load video data when first play is requested
-                    if (video.readyState < 2) {
-                        video.preload = 'auto';
-                        video.load();
-                    }
-                    video.play();
-                    playPauseBtn.classList.add('playing');
-                } else {
-                    video.pause();
-                    playPauseBtn.classList.remove('playing');
-                }
-            }
-            
-            // Event listeners for video controls
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            videoWrapper.addEventListener('click', (e) => {
-                if (e.target === video || e.target === videoWrapper) {
-                    togglePlayPause();
-                }
+        });
+
+        // Pause slideshow on hover
+        const container = document.querySelector('.slideshow-container');
+        container.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        container.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 4000);
+        });
+
+        // Hidden clue interaction
+        const hiddenClue = document.querySelector('.hidden-clue');
+        if (hiddenClue) {
+            hiddenClue.addEventListener('mouseenter', () => {
+                hiddenClue.style.color = 'rgba(0,255,255,0.8)';
+                hiddenClue.style.textShadow = '0 0 10px rgba(0,255,255,0.5)';
             });
             
-            // Progress bar functionality
-            video.addEventListener('timeupdate', () => {
-                const progress = (video.currentTime / video.duration) * 100;
-                videoProgressFill.style.width = `${progress}%`;
-                
-                videoTime.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            hiddenClue.addEventListener('mouseleave', () => {
+                hiddenClue.style.color = 'rgba(0,255,255,0.1)';
+                hiddenClue.style.textShadow = 'none';
             });
-            
-            // Click on progress bar to seek
-            videoProgress.addEventListener('click', (e) => {
-                const rect = videoProgress.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const progress = clickX / rect.width;
-                video.currentTime = progress * video.duration;
-            });
-            
-            // Keyboard controls
-            document.addEventListener('keydown', (e) => {
-                if (e.code === 'Space' && e.target.tagName !== 'BUTTON') {
-                    e.preventDefault();
-                    togglePlayPause();
-                }
-            });
-            
-            // Auto-load optimization - only load metadata when needed
-            video.addEventListener('loadedmetadata', () => {
-                videoTime.textContent = `0:00 / ${formatTime(video.duration)}`;
-            });
-            
-            // Lazy load video when user shows interest
-            video.addEventListener('mouseenter', () => {
-                if (video.preload === 'none') {
-                    video.preload = 'metadata';
-                }
-            });
-            
-            // Progressive loading on scroll or interaction
-            let hasLoadedVideo = false;
-            function ensureVideoLoaded() {
-                if (!hasLoadedVideo) {
-                    video.preload = 'auto';
-                    hasLoadedVideo = true;
-                }
-            }
-            
-            // Load video on any interaction with the page
-            document.addEventListener('click', ensureVideoLoaded, { once: true });
-            document.addEventListener('scroll', ensureVideoLoaded, { once: true });
-            
-            // UI Action Button Interactions
-            const exploreBtn = document.getElementById('exploreBtn');
-            const learnMoreBtn = document.getElementById('learnMoreBtn');
-            const joinBtn = document.getElementById('joinBtn');
-            
-            exploreBtn.addEventListener('click', () => {
-                // Navigate to main experience
-                window.location.href = '../index.html';
-                
-                // Analytics tracking
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'explore_lake_click', {
-                        'event_category': 'ui_interaction',
-                        'event_label': 'explore_button'
-                    });
-                }
-            });
-            
-            learnMoreBtn.addEventListener('click', () => {
-                // Show more information (could open a modal or navigate)
-                alert('🌊 Nyabihoko: An immersive experience where your choices ripple through an ancient lake, affecting both your journey and that of future visitors. Each sacrifice you make becomes part of the collective memory of the waters.');
-                
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'learn_more_click', {
-                        'event_category': 'ui_interaction',
-                        'event_label': 'learn_more_button'
-                    });
-                }
-            });
-            
-            joinBtn.addEventListener('click', () => {
-                // Create a mystical join experience
-                const joinMessage = `
-                🔮 Welcome to the Circle of Memory Keepers 🔮
-                
-                You are about to join an ancient community that guards the secrets of Nyabihoko.
-                
-                Your participation will:
-                • Add your essence to the lake's memory
-                • Influence future visitors' experiences  
-                • Unlock hidden depths of the underwater world
-                
-                Are you ready to become a Guardian of the Lake?
-                `;
-                
-                if (confirm(joinMessage)) {
-                    // Navigate to main experience with special flag
-                    window.location.href = '../index.html?join=true';
-                }
-                
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'join_experience_click', {
-                        'event_category': 'ui_interaction',
-                        'event_label': 'join_button'
-                    });
-                }
-            });
-            
-            // Video interaction analytics
-            video.addEventListener('play', () => {
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'video_play', {
-                        'event_category': 'video_engagement',
-                        'event_label': 'paper_mache_concept_art'
-                    });
-                }
+        }
+
+        // Video loop management
+        const video = document.querySelector('.concept-video');
+        if (video) {
+            video.addEventListener('loadeddata', () => {
+                console.log('Video loaded and ready');
             });
             
             video.addEventListener('ended', () => {
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'video_complete', {
-                        'event_category': 'video_engagement',
-                        'event_label': 'paper_mache_concept_art'
-                    });
-                }
+                video.currentTime = 0;
+                video.play();
             });
-        });
-    </script>
-
-    <!-- Google Analytics Event Tracking for Video Landing Page -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track underwater interactions
-            const parchment = document.querySelector('.ancient-parchment');
-            const videoContainer = document.querySelector('.floating-video-container');
-            
-            // Track parchment interactions
-            parchment.addEventListener('mouseenter', function() {
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'parchment_hover', {
-                        'event_category': 'underwater_engagement',
-                        'event_label': 'ancient_parchment_interaction'
-                    });
-                }
-            });
-
-            // Track video container interactions
-            videoContainer.addEventListener('mouseenter', function() {
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'video_container_hover', {
-                        'event_category': 'video_engagement',
-                        'event_label': 'floating_video_container_interaction'
-                    });
-                }
-            });
-
-            // Track time spent underwater
-            let startTime = Date.now();
-            window.addEventListener('beforeunload', function() {
-                const timeSpent = Math.round((Date.now() - startTime) / 1000);
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'underwater_time', {
-                        'event_category': 'engagement_depth',
-                        'event_label': 'seconds_underwater',
-                        'value': timeSpent
-                    });
-                }
-            });
-
-            // Track cursor interactions
-            let cursorInteractions = 0;
-            document.addEventListener('mousedown', function() {
-                cursorInteractions++;
-                if (cursorInteractions === 1 && typeof gtag !== 'undefined') {
-                    gtag('event', 'first_click', {
-                        'event_category': 'user_engagement',
-                        'event_label': 'first_underwater_interaction'
-                    });
-                }
-            });
-        });
+        }
     </script>
 </body>
 </html>
