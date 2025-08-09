@@ -8,6 +8,13 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-33HPP11ZLH');
+        
+        // Track video landing page visit
+        gtag('event', 'page_view', {
+            'page_title': 'NYABIHOKO Video Landing',
+            'page_location': window.location.href,
+            'content_group1': 'Video Landing'
+        });
     </script>
     
     <meta charset="UTF-8">
@@ -345,11 +352,26 @@
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
+            
+            // Stop auto-advancing when we reach the final video slide
+            if (currentSlide === totalSlides - 1) {
+                clearInterval(slideInterval);
+                console.log('Reached video slide - auto-advance stopped');
+            }
         }
 
         function goToSlide(index) {
             currentSlide = index;
             showSlide(currentSlide);
+            
+            // If manually going to video slide, stop auto-advance
+            // If going to any other slide, restart auto-advance
+            if (currentSlide === totalSlides - 1) {
+                clearInterval(slideInterval);
+            } else {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 4000);
+            }
         }
 
         // Auto-advance slides
@@ -358,35 +380,40 @@
         // Dot navigation
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                clearInterval(slideInterval);
                 goToSlide(index);
-                // Restart auto-advance after manual navigation
-                slideInterval = setInterval(nextSlide, 4000);
             });
         });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') {
-                clearInterval(slideInterval);
-                nextSlide();
-                slideInterval = setInterval(nextSlide, 4000);
+                if (currentSlide < totalSlides - 1) {
+                    clearInterval(slideInterval);
+                    nextSlide();
+                }
             } else if (e.key === 'ArrowLeft') {
                 clearInterval(slideInterval);
                 currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
                 showSlide(currentSlide);
-                slideInterval = setInterval(nextSlide, 4000);
+                // Restart auto-advance only if not on video slide
+                if (currentSlide !== totalSlides - 1) {
+                    slideInterval = setInterval(nextSlide, 4000);
+                }
             }
         });
 
-        // Pause slideshow on hover
+        // Pause slideshow on hover (only if not on video slide)
         const container = document.querySelector('.slideshow-container');
         container.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
+            if (currentSlide !== totalSlides - 1) {
+                clearInterval(slideInterval);
+            }
         });
 
         container.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(nextSlide, 4000);
+            if (currentSlide !== totalSlides - 1) {
+                slideInterval = setInterval(nextSlide, 4000);
+            }
         });
 
         // Hidden clue interaction
@@ -403,16 +430,20 @@
             });
         }
 
-        // Video loop management
+        // Video management - simple loop
         const video = document.querySelector('.concept-video');
         if (video) {
             video.addEventListener('loadeddata', () => {
-                console.log('Video loaded and ready');
+                console.log('Video loaded and ready to loop');
             });
             
-            video.addEventListener('ended', () => {
-                video.currentTime = 0;
-                video.play();
+            // Track when video starts playing
+            video.addEventListener('play', () => {
+                gtag('event', 'video_start', {
+                    'event_category': 'Video',
+                    'event_label': 'NYABIHOKO Concept Art',
+                    'content_group1': 'Video Landing'
+                });
             });
         }
     </script>
